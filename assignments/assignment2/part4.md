@@ -11,7 +11,7 @@ As this is a new course, this text might not be without errors. If you find a si
 
 -----
 
-In [Part 3](https://github.com/cpra/dlvc2016/blob/master/assignments/assignment2/part3.md) we've seen that the classification pipeline of HOG feature extraction followed by softmax classification did not perform particularly well, achieving a test accuracy of about 42%. The classifier also underperformed in terms of training accuracy even without regularization, indicating that it's capacity is too low. This seems reasonable as the softmax classifier is a linear model.
+In [Part 3](https://github.com/cpra/dlvc2016/blob/master/assignments/assignment2/part3.md) we've seen that the classification pipeline of HOG feature extraction followed by softmax classification did not perform particularly well, achieving a test accuracy of about 42%. The classifier also underperformed in terms of training accuracy even without regularization, indicating that its capacity is too low. This seems reasonable as the softmax classifier is a linear model.
 
 It can be shown easily that this is the case by replacing the softmax classifier with a more powerful classifier, such as a multilayer perceptron. Such a classifier, even a relatively "simple" one with a single hidden layer of 50 neurons or so, achieves a training accuracy close to 100%. Increasing the number of neurons while introducing weight decay and early stopping leads to a validation and test accuracy of about 47%. This is a substantial improvement over the softmax classifier, but still nowhere close to CNNs. We could maybe squeeze out a few percent more by tuning the model, but at some point the limitations of the HOG features hinder further progress. To this end, we'll now finally switch to deep learning and CNNs.
 
@@ -164,7 +164,7 @@ In practice, we'll want to apply our trained classifier to new data (images). In
 * `--means`: means for `PerChannelSubtractionImageTransformation`
 * `--stds`: standard deviations for `PerChannelDivisionImageTransformation`
 
-Use argument parsers provided by your programming language, e.g. `argparse` in Python. `--means` and `--stds` can expect any desired input format, such as `--means 1 2 3` or `--means 1,2,3`.
+Use argument parsers provided by your programming language, e.g. [`argparse`](https://docs.python.org/3/library/argparse.html) in Python. `--means` and `--stds` can expect any desired input format, such as `--means 1 2 3` or `--means 1,2,3`.
 
 The script should load the classifier and image, preprocess the image using the same operations as carried out during classifier training (hence `--means` and `--stds`), classify the image, and report the class scores as well as the ID of the most likely class to the console. The script should be flexible enough to support arbitrary classifiers and image resolutions, so do not hard-code CIFAR10-specific things such as the input resolution expected by the classifier; this information can be obtained from the loaded classifier.
 
